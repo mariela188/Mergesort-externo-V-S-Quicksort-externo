@@ -1,0 +1,4 @@
+
+char * merge_externo(){
+
+}
