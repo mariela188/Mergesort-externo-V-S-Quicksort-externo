@@ -1,4 +1,5 @@
 #include <stdio.h>
+
 /**
    * @brief Funcion que hace merge a arreglos en memoria externa.
    *
