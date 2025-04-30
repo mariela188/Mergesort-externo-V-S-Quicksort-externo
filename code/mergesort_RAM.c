@@ -12,7 +12,7 @@
    * @param a: cantidad de subarreglos
    * @return: Int cantidad de accesos a memoria
 */
-void merge_RAM(int* arr, int* aux, int inicio, int medio, int fin) {
+void merge_RAM(int64_t* arr, int64_t* aux, int inicio, int medio, int fin) {
     int i = inicio;
     int j = medio + 1;
     int k = inicio;
@@ -35,11 +35,11 @@ void merge_RAM(int* arr, int* aux, int inicio, int medio, int fin) {
 }
 
 // Función recursiva de Mergesort
-void mergesort(int* arr, int* aux, int inicio, int fin) {
+void mergesort_RAM(int64_t* arr, int64_t* aux, int inicio, int fin) {
     if (inicio >= fin) return;
 
     int medio = (inicio + fin) / 2;
-    mergesort(arr, aux, inicio, medio);
-    mergesort(arr, aux, medio + 1, fin);
+    mergesort_RAM(arr, aux, inicio, medio);
+    mergesort_RAM(arr, aux, medio + 1, fin);
     merge_RAM(arr, aux, inicio, medio, fin);
 }
