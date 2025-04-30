@@ -1,27 +1,24 @@
 #include "mergesort_RAM.c"
-#include <stdio.h>
+#include "merge.c"
+
 #include <stdlib.h>
 #include <sys/time.h>
 
 
 /**
-   * @brief Ordena un arreglo de enteros en memoria externa utilizando el algoritmo Mergesort.
+   * @brief Ordena un arreglo de enteros en memoria externa utilizando el algoritmo Quiqksort.
    *
-   * Esta función calcula la posición exacta en bytes en el archivo binario a
-   * partir del índice proporcionado, lee los bytes correspondientes a un nodo,
-   * y los deserializa para reconstruir la estructura TreeNode en memoria.
-   * Es responsabilidad del usuario asegurarse de que el offset sea válido,
-   * es decir, que exista un nodo en esa posición.
-   *
-   * @param A: puntero a un archivo
-   * @param B: tamaño del bloque
-   * @param M: tamaño del bloque de memoria
+   * Esta función
+   * 
+   * @param A: puntero a un archivo a ordenar
+   * @param B: tamaño del bloques
+   * @param M: tamaño de RAM
    * @param a: cantidad de subarreglos
    * @param N: tamaño en bytes de A
    * @return: Int cantidad de accesos a memoria
-   * @throws Termina el programa si no puede abrir el archivo o ...
+   * @throws Termina el programa si no puede abrir el archivo o hay un error al crear los archivos de los subarreglos.
    */
-int Quicksort_externo( File *A , int B, int M, int a, int N) {
+int Quicksort_externo( FILE *A , int B, int M, int a, int N) {
     FILE* archivo = fopen(A, "rb");
     if (!archivo) {
         perror("Error al abrir archivo de entrada");
