@@ -10,9 +10,10 @@
    * @param n: cantidad de archivos a mergear
    * @param nombres: lista de nombres de cada archivo a mergear
    * @param tamanos: lista de tamaños de cada archivo a mergear
-   * @return: Int cantidad de accesos a memoria
+   * @param A: nombre del archivo de salida
+   * @return int: cantidad de accesos a memoria
 */
-int merge_qs_externo(int n, char *nombres[], int tamanos[], const char *A){
+int merge_qs_externo(int n, char nombres[][32], int tamanos[], const char *A) {
     //contador de accesos a memoria
     int accesos = 0;
 
