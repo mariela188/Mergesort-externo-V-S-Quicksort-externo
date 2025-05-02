@@ -1,18 +1,19 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "constantes.h"
 
 /**
-   * @brief Ordena un arreglo de enteros en memoria externa utilizando el algoritmo Mergesort.
+   * @brief Fusiona dos subarreglos ordenados en un solo arreglo ordenado.
    *
-   * Esta función hace...
+   * Esta función es parte del algoritmo mergesort. Fusiona en orden creciente los 
+   * dos subarreglos contiguos del arreglo 'arr', 'arr[inicio..medio]' y 'arr[medio+1..fin]', 
+   * usando el arreglo auxiliar 'aux'.
    * 
-   * @param arr: 
-   * @param B: tamaño del bloque
-   * @param M: tamaño del bloque de memoria
-   * @param a: cantidad de subarreglos
-   * @return: Int cantidad de accesos a memoria
+   * @param arr: arreglo original con los subarreglos a fusionar
+   * @param aux: arreglo auxiliar a utilizar
+   * @param inicio: índice inicial del primer subarreglo
+   * @param medio: índice final del primer subarreglo
+   * @param fin: índice final del segundo subarreglo
 */
-void merge_RAM(int64_t* arr, int64_t* aux, int inicio, int medio, int fin) {
+void merge(int64_t* arr, int64_t* aux, int inicio, int medio, int fin) {
     int i = inicio;
     int j = medio + 1;
     int k = inicio;
@@ -34,12 +35,21 @@ void merge_RAM(int64_t* arr, int64_t* aux, int inicio, int medio, int fin) {
     }
 }
 
-// Función recursiva de Mergesort
-void mergesort_RAM(int64_t* arr, int64_t* aux, int inicio, int fin) {
+/**
+   * @brief Ordena un arreglo de enteros en memoria RAM.
+   *
+   * Esta función ordena un arreglo de enteros de 64 bits a través del algoritmo
+   * mergesort usando el arreglo auxiliar 'aux'.
+   * 
+   * @param arreglo: arreglo de enteros a ordenar
+   * @param aux: arreglo auxiliar a utilizar
+   * @param incio: índice del inicio del subarreglo a ordenar
+   * @param fin: índice del final del subarreglo a ordenar
+*/
+void mergesort_RAM(int64_t* arreglo, int64_t* aux, int inicio, int fin) {
     if (inicio >= fin) return;
-
     int medio = (inicio + fin) / 2;
-    mergesort_RAM(arr, aux, inicio, medio);
-    mergesort_RAM(arr, aux, medio + 1, fin);
-    merge_RAM(arr, aux, inicio, medio, fin);
+    mergesort_RAM(arreglo, aux, inicio, medio);
+    mergesort_RAM(arreglo, aux, medio + 1, fin);
+    merge(arreglo, aux, inicio, medio, fin);
 }

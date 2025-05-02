@@ -1,19 +1,20 @@
 #include "constantes.h"
 
 /**
-   * @brief Función que hace merge en memoria externa de n subarreglos de quicksort ordenados.
+   * @brief Función que concatena n archivos en memoria externa.
    *
-   * Esta función recibe un lista de archivos ordenados de manera
-   * ascendente, donde los elementos de cada archivo son menores a los elementos del
-   * archivo siguiente, y los mergea en un solo archivo de salida.
+   * Esta función recibe un lista de archivos binarios y los concatena en un solo 
+   * archivo de salida. Retorna la cantidad de accesos realizados a la memoria externa.
    * 
-   * @param n: cantidad de archivos a mergear
-   * @param nombres: lista de nombres de cada archivo a mergear
-   * @param tamanos: lista de tamaños de cada archivo a mergear
+   * @param n: cantidad de archivos a concatenar
+   * @param nombres: lista de nombres de cada archivo
+   * @param tamanos: lista de tamaños de cada archivo
    * @param A: nombre del archivo de salida
-   * @return int: cantidad de accesos a memoria
+   * @return int: cantidad de accesos a memoria externa
+   * @throws Termina el programa si no puede abrir algún archivo o si hay un error al 
+   * asignar memoria para malloc.
 */
-int merge_qs_externo(int n, char nombres[][32], int tamanos[], const char *A) {
+int concatenar_externo(int n, char nombres[][32], int tamanos[], const char *A) {
     //contador de accesos a memoria
     int accesos = 0;
 

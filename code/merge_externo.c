@@ -4,32 +4,39 @@
    * @brief Función que hace merge de n arreglos ordenados en memoria externa.
    *
    * Esta función recibe un lista de archivos ordenados de manera
-   * ascendente y los mergea en un solo archivo de salida.
+   * ascendente y los mergea en un solo archivo de salida. Retorna la cantidad
+   * de accesos realizados a la memoria externa.
    * 
    * @param n: cantidad de archivos a mergear
    * @param nombres: lista de nombres de cada archivo a mergear
    * @param tamanos: lista de tamaños de cada archivo a mergear
    * @param A: nombre del arhivo de salida
-   * @return int: cantidad de accesos a memoria
+   * @return int: cantidad de accesos a memoria externa
+   * @throws Termina el programa si no puede abrir algún archivo o si hay un error al 
+   * asignar memoria para malloc.
 */
-int merge_ms_externo(int n, char nombres[][32], int tamanos[], const char *A) {
+int merge_externo(int n, char nombres[][32], int tamanos[], const char *A) {
     //contador de accesos a memoria
     int accesos = 0;
 
     //crear n+1 buffers (uno por cada arhivo de entrada y uno de salida)
     int64_t **buffers = malloc(n * sizeof(int64_t *));  //arreglo de punteros
     if (buffers == NULL) {
-        perror("Error al asignar el arreglo de buffers");
+        perror("Error al asignar memoria");
         exit(1);
     }
     for (int i = 0; i < n; i++) {
         buffers[i] = malloc(B);
         if (buffers[i] == NULL) {
-            perror("Error al asignar un buffer");
+            perror("Error al asignar memoria");
             exit(1);
         }
     }
     int64_t *buffer_salida = malloc(B);
+    if (buffer_salida == NULL) {
+        perror("Error al asignar memoria");
+        exit(1);
+    }
 
     //abrir archivo de salida
     FILE *salida = fopen(A, "rb+"); //"rb+" = leer y escribir en binario
