@@ -11,4 +11,4 @@
 #define T sizeof(int64_t) //Tamaño en bytes de cada entero del input
 #define E (B / T) //Cantidad máxima de enteros por bloque
 
-#endif //CONSTANTES_H
+#endif // CONSTANTES_H

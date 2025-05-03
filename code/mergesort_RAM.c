@@ -1,9 +1,9 @@
 #include "constantes.h"
 
 /**
-   * @brief Fusiona dos subarreglos ordenados en un solo arreglo ordenado.
+   * @brief Mezcla dos subarreglos ordenados en un solo arreglo ordenado.
    *
-   * Esta función es parte del algoritmo mergesort. Fusiona en orden creciente los 
+   * Esta función es parte del algoritmo mergesort en RAM. Mezcla en orden creciente los 
    * dos subarreglos contiguos del arreglo 'arr', 'arr[inicio..medio]' y 'arr[medio+1..fin]', 
    * usando el arreglo auxiliar 'aux'.
    * 

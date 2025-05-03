@@ -1,5 +1,4 @@
 #include "constantes.h"
-#include "quicksort.c"
 
 int main() {
     const char* nombre_archivo = "prueba_pequena.bin";

@@ -8,13 +8,13 @@
    * original. Retorna la cantidad de accesos a la memoria externa.
    * 
    * @param A: nombre del archivo a ordenar
-   * @param a: cantidad de subarreglos a generar
+   * @param a: cantidad de subarreglos a generar al particionar
    * @param N: tamaño en bytes de A
    * @return int: cantidad de accesos a memoria externa
    * @throws Termina el programa si no puede abrir el archivo o si hay un error al crear los 
    * archivos de los subarreglos o al asignar memoria para malloc.
    */
-int quicksort_externo(const char *A, int a, int N) {
+int quicksort_externo(const char *A, int a, int64_t N) {
     //contador de accesos
     int accesos = 0;
 
@@ -25,21 +25,22 @@ int quicksort_externo(const char *A, int a, int N) {
         exit(1);
     }
 
+    int64_t cant_bloques = (N + B - 1) / B; //cantidad de bloques del archivo
+    int64_t cant_num = N/T; //cantidad de enteros en el archivo
+
     //caso base
-    if (N <= M) {//leer archivo por bloques y guardarlos en un arreglo, luego ordenar arreglo y escribirlo por bloques 
-        int cant_bloques = (N + B - 1) / B; //cantidad de bloques del archivo
-        int cant_num = N/T; //cantidad de enteros en el archivo
+    if (N <= M) { //leer archivo por bloques y guardarlos en un arreglo, luego ordenar arreglo y escribirlo por bloques 
         int64_t* arreglo_a_ordenar = malloc(N);
         if (arreglo_a_ordenar == NULL) {
             perror("Error al asignar memoria");
             exit(1);
         }
 
-        int i_a = 0; //cantidad de enteros escritos en arreglo a ordenar 
-        int i_arch = 0; //cantidad de enteros escritos en archivo final 
+        int64_t i_a = 0; //cantidad de enteros escritos en arreglo a ordenar 
+        int64_t i_arch = 0; //cantidad de enteros escritos en archivo final 
         
-        //llenar el arreglo en RAM
-        for (int i = 0; i < cant_bloques; i++) { //recorro los bloques
+        //leer archivo y lenar el arreglo en RAM
+        for (int64_t i = 0; i < cant_bloques; i++) { //recorro los bloques
             int64_t *bloque_i = malloc(B);
             if (bloque_i == NULL) {
                 perror("Error al asignar memoria");
@@ -65,7 +66,7 @@ int quicksort_externo(const char *A, int a, int N) {
 
         //escribir arreglo ordenado en el archivo original
         fseek(archivo, 0, SEEK_SET);
-        for(int i = 0; i < cant_bloques-1; i++){
+        for(int64_t i = 0; i < cant_bloques-1; i++){
             int64_t *bloque_i = malloc(B);
             if (bloque_i == NULL) {
                 perror("Error al asignar memoria");
@@ -100,15 +101,14 @@ int quicksort_externo(const char *A, int a, int N) {
     }
     //caso recursivo
     else{ //N>M, dividir el archivo en a subarreglos
-        int cant_bloques = (N + B - 1) / B;
-
+        //crear arreglos auxiliares
         int64_t **arreglo_en_RAM = malloc(a * sizeof(int64_t*)); //arreglo_en_RAM[a][E] para guardar los bloques de subarreglos
         if (arreglo_en_RAM == NULL) {
             perror("Error al asignar memoria");
             exit(1);
         }
         int cnt_sub_RAM[a]; //cnt_sub_RAM[a] para guardar los contadores de cada subarreglo
-        int N_subarreglos[a]; //arreglo de enteros para almacenar los bytes escritos en cada archivo
+        int64_t N_subarreglos[a]; //arreglo de enteros para almacenar los bytes escritos en cada archivo
 
         char nombres_archivos[a][32]; //arreglo 2D para guardar los nombres de los archivos
         FILE* subarreglos[a]; //arreglo de cursores de los archivos
@@ -135,7 +135,7 @@ int quicksort_externo(const char *A, int a, int N) {
 
         //leer archivo de entrada por bloques
         int64_t pivotes[a-1]; //arreglo de pivotes
-        for(int i = 0; i < cant_bloques; i++) { //recorro los bloques
+        for (int64_t i = 0; i < cant_bloques; i++) { //recorro los bloques
             int64_t *bloque_i = malloc(B);
             if (bloque_i == NULL) {
                 perror("Error al asignar memoria");
@@ -143,7 +143,7 @@ int quicksort_externo(const char *A, int a, int N) {
             }
             int leidos = fread(bloque_i, T, E, archivo);
             accesos++;
-            if(i == 0) {// bloque_i es el primero, saco pivotes
+            if (i == 0) { // bloque_i es el primero, saco pivotes
                 for (int j = 0; j < a-1; j++) {
                     pivotes[j] = bloque_i[j];
                 }
@@ -182,6 +182,7 @@ int quicksort_externo(const char *A, int a, int N) {
                 N_subarreglos[j] += cnt_sub_RAM[j]*T;
             }
         }
+        
         //ordenar recursivamente los subarreglos
         for (int i = 0; i < a; i++) {
             free(arreglo_en_RAM[i]);
@@ -191,10 +192,9 @@ int quicksort_externo(const char *A, int a, int N) {
         free(arreglo_en_RAM);
 
         //concatenar archivos
+        fclose(archivo);
         accesos += concatenar_externo(a, nombres_archivos, N_subarreglos, A);
 
-        //cerrar archivo y retornar
-        fclose(archivo);
         return accesos;
     }    
 }

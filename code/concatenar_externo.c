@@ -14,7 +14,7 @@
    * @throws Termina el programa si no puede abrir algún archivo o si hay un error al 
    * asignar memoria para malloc.
 */
-int concatenar_externo(int n, char nombres[][32], int tamanos[], const char *A) {
+int concatenar_externo(int n, char nombres[][32], int64_t tamanos[], const char *A) {
     //contador de accesos a memoria
     int accesos = 0;
 
@@ -43,8 +43,8 @@ int concatenar_externo(int n, char nombres[][32], int tamanos[], const char *A) 
             perror("Error al abrir un archivo de entrada");
             exit(1);
         }
-        int bloques_archivo = (tamanos[i]+B-1)/B;
-        for (int k=0; k<bloques_archivo; k++) {
+        int64_t bloques_archivo = (tamanos[i]+B-1)/B;
+        for (int64_t k=0; k<bloques_archivo; k++) {
             int leidos = fread(buffer_r, T, E, archivo); //leer bloque
             accesos++;
             for (int j=0; j<leidos; j++) { //escribir elementos en buffer de escritura

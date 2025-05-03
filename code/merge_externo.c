@@ -15,7 +15,7 @@
    * @throws Termina el programa si no puede abrir algún archivo o si hay un error al 
    * asignar memoria para malloc.
 */
-int merge_externo(int n, char nombres[][32], int tamanos[], const char *A) {
+int merge_externo(int n, char nombres[][32], int64_t tamanos[], const char *A) {
     //contador de accesos a memoria
     int accesos = 0;
 
@@ -47,16 +47,17 @@ int merge_externo(int n, char nombres[][32], int tamanos[], const char *A) {
 
     //posiciones en que se está leyendo para cada buffer y
     //cantidad de elementos escritos de cada archivo 
-    int pos[n], cont[n];
+    int pos[n];
+    int64_t cont[n];
     int pos_salida = 0;
-    int cont_salida = 0;    
+    int64_t cont_salida = 0;    
 
     //variable y arreglo de flags para saber cuando terminar
     int listo = 0;
     int terminados[n];
 
     //arreglo de la cantidad de elementos de cada archivo
-    int elementos[n];
+    int64_t elementos[n];
 
     //lectura inicial de los archivos de entrada
     FILE *archivos[n];

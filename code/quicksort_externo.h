@@ -1,4 +1,4 @@
 #include "constantes.h"
 
-int quicksort_externo(const char *A, int a, int N);
-int concatenar_externo(int n, char nombres[][32], int tamanos[], const char *A);
+int quicksort_externo(const char *A, int a, int64_t N);
+int concatenar_externo(int n, char nombres[][32], int64_t tamanos[], const char *A);
