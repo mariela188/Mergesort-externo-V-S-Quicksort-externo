@@ -1,5 +1,5 @@
 #include "quicksort_externo.h"
-
+#include "quicksort_RAM.c"
 /**
    * @brief Ordena un arreglo de enteros en memoria externa utilizando el algoritmo quicksort.
    *
@@ -55,14 +55,9 @@ int quicksort_externo(const char *A, int a, int64_t N) {
             free(bloque_i);
         }
 
-        //ordenar arreglo usando mergesort en RAM
-        int64_t* aux = malloc(N);
-        if (aux == NULL) {
-            perror("Error al asignar memoria");
-            exit(1);
-        }
-        mergesort_RAM(arreglo_a_ordenar, aux, 0, cant_num-1); //CAMBIAR A QUICKSORT
-        free(aux);
+        //ordenar arreglo usando quicksort en RAM
+        quicksort_RAM(arreglo_a_ordenar, 0, cant_num-1); //CAMBIAR A QUICKSORT
+        
 
         //escribir arreglo ordenado en el archivo original
         fseek(archivo, 0, SEEK_SET);
@@ -147,14 +142,9 @@ int quicksort_externo(const char *A, int a, int64_t N) {
                 for (int j = 0; j < a-1; j++) {
                     pivotes[j] = bloque_i[j];
                 }
-                //ordenar pivotes con mergesort en RAM
-                int64_t *pivotes_aux = malloc((a-1)*T);
-                if (pivotes_aux == NULL) {
-                    perror("Error al asignar memoria");
-                    exit(1);
-                }
-                mergesort_RAM(pivotes, pivotes_aux, 0, a-2); //CAMBIAR A QUICKSORT
-                free(pivotes_aux);
+                
+                mquicksort_RAM(pivotes, 0, a-2); 
+                
             }
             for (int l = 0; l < leidos; l++) { //recorrer bloque en RAM
                 int64_t num = bloque_i[l]; 
