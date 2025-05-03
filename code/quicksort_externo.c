@@ -1,5 +1,5 @@
 #include "quicksort_externo.h"
-#include "quicksort_RAM.c"
+
 /**
    * @brief Ordena un arreglo de enteros en memoria externa utilizando el algoritmo quicksort.
    *
