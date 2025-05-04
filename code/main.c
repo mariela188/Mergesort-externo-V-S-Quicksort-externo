@@ -1,5 +1,6 @@
 #include "constantes.h"
-#include "generar_secuencias.c"
+#include "mergesort_externo.h"
+#include "quicksort_externo.h"
 
 void imprimir_primeros_10(const char *nombre_archivo) {
     FILE *archivo = fopen(nombre_archivo, "rb");
@@ -21,8 +22,24 @@ void imprimir_primeros_10(const char *nombre_archivo) {
 }
 
 int main() {
-    int64_t tamano = (int64_t)60 * M;
-    generar_secuencia(tamano, "prueba_secuencia.bin");
-    imprimir_primeros_10("prueba_secuencia.bin");
+    clock_t inicio, fin;
+    double tiempo;
+    int64_t N = (int64_t)60 * M;
+
+    printf("Archivo original\n");
+    imprimir_primeros_10("data/A.bin");
+
+    inicio = clock();
+    int accesos = mergesort_externo("data/A.bin", 2, N);
+    fin = clock();
+
+    printf("Archivo ordenado\n");
+    imprimir_primeros_10("data/A.bin");
+
+    tiempo = ((double)(fin - inicio)) / CLOCKS_PER_SEC;
+
+    printf("Tiempo de ejecucion: %.6f segundos\n", tiempo);
+    printf("Accesos a memoria externa: %d\n", accesos);
+
     return 0;
 }

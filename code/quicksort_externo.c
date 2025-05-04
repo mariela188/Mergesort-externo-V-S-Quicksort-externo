@@ -56,7 +56,7 @@ int quicksort_externo(const char *A, int a, int64_t N) {
         }
 
         //ordenar arreglo usando quicksort en RAM
-        quicksort_RAM(arreglo_a_ordenar, 0, cant_num-1); //CAMBIAR A QUICKSORT
+        quicksort_RAM(arreglo_a_ordenar, 0, cant_num-1);
         
 
         //escribir arreglo ordenado en el archivo original
@@ -106,6 +106,7 @@ int quicksort_externo(const char *A, int a, int64_t N) {
         int64_t N_subarreglos[a]; //arreglo de enteros para almacenar los bytes escritos en cada archivo
 
         char nombres_archivos[a][32]; //arreglo 2D para guardar los nombres de los archivos
+        char *nombre_base = quitar_extension_bin(A); //nombre sin extensión del archivo original
         FILE* subarreglos[a]; //arreglo de cursores de los archivos
 
         //crear archivos e inicializar arreglos auxiliares
@@ -117,7 +118,7 @@ int quicksort_externo(const char *A, int a, int64_t N) {
             }
             cnt_sub_RAM[i] = 0;
             N_subarreglos[i] = 0;
-            snprintf(nombres_archivos[i], sizeof(nombres_archivos[i]), "%s_%d.bin", A, i); //guarda un nombre único para cada archivo
+            snprintf(nombres_archivos[i], sizeof(nombres_archivos[i]), "%s_%d.bin", nombre_base, i); //guarda un nombre único para cada archivo
             subarreglos[i] = fopen(nombres_archivos[i], "wb");
             if (subarreglos[i] == NULL) {
                 perror("Error al crear archivo");
@@ -127,6 +128,7 @@ int quicksort_externo(const char *A, int a, int64_t N) {
                 exit(1);
             }
         }
+        free(nombre_base);
 
         //leer archivo de entrada por bloques
         int64_t pivotes[a-1]; //arreglo de pivotes
@@ -143,7 +145,7 @@ int quicksort_externo(const char *A, int a, int64_t N) {
                     pivotes[j] = bloque_i[j];
                 }
                 
-                mquicksort_RAM(pivotes, 0, a-2); 
+                quicksort_RAM(pivotes, 0, a-2); 
                 
             }
             for (int l = 0; l < leidos; l++) { //recorrer bloque en RAM

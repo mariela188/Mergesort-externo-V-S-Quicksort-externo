@@ -42,3 +42,11 @@ void generar_secuencia(int64_t N, const char *nombre) {
     fclose(archivo);
     free(buffer);
 }
+
+int main() {
+    int multiplo = 4;
+    int64_t N = (int64_t)multiplo * M;
+    char nombre_archivo[32];
+    snprintf(nombre_archivo, sizeof(nombre_archivo), "data/A_%dM.bin", multiplo);
+    generar_secuencia(N, nombre_archivo);
+}

@@ -33,6 +33,7 @@ int obtener_a(char *A, int64_t N, int l, int r) {
 }
 
 int main() {
-    int64_t N = 60*M;
-    int a = obtener_a("prueba_secuencia.bin", N, 2, E);
+    int64_t N = (int64_t)60*M;
+    int a = obtener_a("data/A.bin", N, 2, E);
+    printf("valor de a óptimo: %d\n", a);
 }
