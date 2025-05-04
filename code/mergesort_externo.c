@@ -107,13 +107,13 @@ int mergesort_externo(const char *A, int a, int64_t N) {
         int64_t cant_num_sub[a]; //arreglo de la cantidad de enteros de los subarreglos
         int64_t N_sub[a]; //arreglo de los tamaños en bytes de los archivos
 
-        char nombres_archivos[a][32]; //arreglo 2D para guardar los nombres de los archivos
+        char nombres_archivos[a][64]; //arreglo 2D para guardar los nombres de los archivos
         char *nombre_base = quitar_extension_bin(A); //nombre sin extensión del archivo original
         FILE* subarreglos[a]; //arreglo de cursores de los archivos
 
         //crear archivos para los subarreglos y llenar arreglos auxiliares
         for (int i = 0; i < a; i++) {
-            snprintf(nombres_archivos[i], sizeof(nombres_archivos[i]), "%s_%d.bin", nombre_base, i); //guarda un nombre único para cada archivo
+            snprintf(nombres_archivos[i], sizeof(nombres_archivos[i]), "%s%d.bin", nombre_base, i); //guarda un nombre único para cada archivo
             subarreglos[i] = fopen(nombres_archivos[i], "wb");
             if (subarreglos[i] == NULL) {
                 perror("Error al crear archivo");

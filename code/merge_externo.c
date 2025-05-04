@@ -15,7 +15,7 @@
    * @throws Termina el programa si no puede abrir algún archivo o si hay un error al 
    * asignar memoria para malloc.
 */
-int merge_externo(int n, char nombres[][32], int64_t tamanos[], const char *A) {
+int merge_externo(int n, char nombres[][64], int64_t tamanos[], const char *A) {
     //contador de accesos a memoria
     int accesos = 0;
 
@@ -52,8 +52,7 @@ int merge_externo(int n, char nombres[][32], int64_t tamanos[], const char *A) {
     int pos_salida = 0;
     int64_t cont_salida = 0;    
 
-    //variable y arreglo de flags para saber cuando terminar
-    int listo = 0;
+    //arreglo de flags para saber cuando terminar
     int terminados[n];
 
     //arreglo de la cantidad de elementos de cada archivo
@@ -77,8 +76,7 @@ int merge_externo(int n, char nombres[][32], int64_t tamanos[], const char *A) {
     }
 
     //recorrer archivos
-    while (!listo) {
-        listo = 1;
+    while (1) {
         //encontrar mínimo entre la posicion actual de cada buffer
         int64_t min = INT64_MAX; //máximo valor posible
         int indice_min;
@@ -101,8 +99,12 @@ int merge_externo(int n, char nombres[][32], int64_t tamanos[], const char *A) {
         }
         if (cont[indice_min] == elementos[indice_min]) { //se escribieron todos los elementos del archivo correspondiente
             terminados[indice_min] = 1; //se marca como terminado
+            int listo = 1;
             for (int i=0; i<n; i++) {
                 listo &= terminados[i]; //si falta algún archivo por terminar, listo queda en 0
+            }
+            if (listo) {
+                break; //si todos los archivos se escribieron completamente, se termina
             }
         }
         else { //aún faltan elementos por leer

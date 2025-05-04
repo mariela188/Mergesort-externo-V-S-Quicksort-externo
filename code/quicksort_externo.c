@@ -105,7 +105,7 @@ int quicksort_externo(const char *A, int a, int64_t N) {
         int cnt_sub_RAM[a]; //cnt_sub_RAM[a] para guardar los contadores de cada subarreglo
         int64_t N_subarreglos[a]; //arreglo de enteros para almacenar los bytes escritos en cada archivo
 
-        char nombres_archivos[a][32]; //arreglo 2D para guardar los nombres de los archivos
+        char nombres_archivos[a][64]; //arreglo 2D para guardar los nombres de los archivos
         char *nombre_base = quitar_extension_bin(A); //nombre sin extensión del archivo original
         FILE* subarreglos[a]; //arreglo de cursores de los archivos
 
@@ -118,7 +118,7 @@ int quicksort_externo(const char *A, int a, int64_t N) {
             }
             cnt_sub_RAM[i] = 0;
             N_subarreglos[i] = 0;
-            snprintf(nombres_archivos[i], sizeof(nombres_archivos[i]), "%s_%d.bin", nombre_base, i); //guarda un nombre único para cada archivo
+            snprintf(nombres_archivos[i], sizeof(nombres_archivos[i]), "%s%d.bin", nombre_base, i); //guarda un nombre único para cada archivo
             subarreglos[i] = fopen(nombres_archivos[i], "wb");
             if (subarreglos[i] == NULL) {
                 perror("Error al crear archivo");
