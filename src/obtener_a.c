@@ -15,8 +15,8 @@ int obtener_a(const char *A, int64_t N, int l, int r) {
                 min = resultado;
                 a = i;
             }
+            free(A_copia);
         }
-        free(A_copia);
         return a;
     }
     else { //búsqueda ternaria

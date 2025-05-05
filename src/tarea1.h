@@ -167,6 +167,7 @@ int quicksort_externo(const char *A, int a, int64_t N);
 
 
 //verificar_algoritmos.c
+
 /**
    * @brief Verifica si un archivo binario está ordenado ascendentemente.
    * 
