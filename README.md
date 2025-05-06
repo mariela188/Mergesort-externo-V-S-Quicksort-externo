@@ -8,7 +8,6 @@ Tarea 1 del Ramo CC4102 - Diseño y Análisis de Algoritmos
 - link pauta ejercicio: https://github.com/pabloskewes/material-complementario-logs-2025-1/blob/main/serializacion_bst/src/tree.cpp
 - link to do notion: https://www.notion.so/T1-1e4db369130480f4b666ef6a7ecc27ae?pvs=4
   
-
 ## README
   Para esta tarea, la organización del trabajo sigue el siguiente formato:
   - `src/`:
