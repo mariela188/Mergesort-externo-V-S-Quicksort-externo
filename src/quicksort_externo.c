@@ -190,7 +190,7 @@ int quicksort_externo(const char *A, int a, int64_t N) {
             }
             cnt_sub_RAM[i] = 0;
             N_subarreglos[i] = 0;
-            snprintf(nombres_archivos[i], sizeof(nombres_archivos[i]), "%s%d.bin", nombre_base, i); //guarda un nombre único para cada archivo
+            snprintf(nombres_archivos[i], sizeof(nombres_archivos[i]), "%s_%d.bin", nombre_base, i); //guarda un nombre único para cada archivo
             subarreglos[i] = fopen(nombres_archivos[i], "wb");
             if (subarreglos[i] == NULL) {
                 perror("Error al crear archivo");

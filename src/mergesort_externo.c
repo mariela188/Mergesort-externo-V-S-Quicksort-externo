@@ -249,7 +249,7 @@ int mergesort_externo(const char *A, int a, int64_t N) {
 
         //crear archivos para los subarreglos y llenar arreglos auxiliares
         for (int i = 0; i < a; i++) {
-            snprintf(nombres_archivos[i], sizeof(nombres_archivos[i]), "%s%d.bin", nombre_base, i); //guarda un nombre único para cada archivo
+            snprintf(nombres_archivos[i], sizeof(nombres_archivos[i]), "%s_%d.bin", nombre_base, i); //guarda un nombre único para cada archivo
             subarreglos[i] = fopen(nombres_archivos[i], "wb");
             if (subarreglos[i] == NULL) {
                 perror("Error al crear archivo");
