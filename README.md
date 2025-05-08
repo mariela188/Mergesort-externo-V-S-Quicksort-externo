@@ -1,30 +1,63 @@
 # Mergesort externo V/S Quicksort externo
 Tarea 1 del Ramo CC4102 - Diseño y Análisis de Algoritmos
 
+## Contenido
+Para esta tarea, la organización del trabajo sigue el siguiente formato:
 
-## Links importantes
-- link informe overleaf: https://www.overleaf.com/project/680fb11bb78ffb8e40136899
-- link ejercicio clase: https://github.com/pabloskewes/material-complementario-logs-2025-1?tab=readme-ov-file
-- link pauta ejercicio: https://github.com/pabloskewes/material-complementario-logs-2025-1/blob/main/serializacion_bst/src/tree.cpp
-- link to do notion: https://www.notion.so/T1-1e4db369130480f4b666ef6a7ecc27ae?pvs=4
-  
-## README
-  Para esta tarea, la organización del trabajo sigue el siguiente formato:
-  - `src/`:
-    - `tarea1.h`: librerias, deifiniciones y encabezado de funciones.
-    - `mergesort_externo.c`: implementación de algoritmo de mergesort en memoria externa.
-    - `quicksort_externo.c`: implementación de algoritmo de quicksort en memoria externa.
-    - `obtener_a.c`: obtención de la aridad utilizada para Mergesort externo.
-    - `comparar_algoritmos.c`: experimento que comprara los algortimos en tiempo y accesos al disco
-    - `util.c`: implementación de función que genera archivos y otras funciones auxiliares utilizadas.
-    - `verificar_algoritmos.c`:
-    verificar si los archivos ordenados por los algortimos están correctamente ordenados.
-    
+- `src/`: Código fuente
+  - `tarea1.h`: librerias, deifiniciones y encabezado de funciones.
+  - `mergesort_externo.c`: implementación de algoritmo de mergesort en memoria externa.
+  - `quicksort_externo.c`: implementación de algoritmo de quicksort en memoria externa.
+  - `util.c`: implementación de función que genera archivos y otras funciones auxiliares utilizadas.
+  - `verificar_algoritmos.c`: código para verificar si los archivos resultantes de los algortimos están correctamente ordenados.
+  - `obtener_a.c`: código para la obtención de la aridad óptima para Mergesort externo.
+  - `test_docker.c`: código de prueba para testear el contenedor de Docker. 
+  - `comparar_algoritmos.c`: código para comparar los algortimos en tiempo y accesos a disco.
+
+- `bin/`: Archivos ejecutables
+  - `obtener_a`: ejecutable para obtener la aridad óptima para Mergesort externo.
+  - `verificar_algoritmos`: ejecutable para verificar correcto funcionamiento de los algoritmos.
+  - `test_docker`: ejecutable para probar el funcionamiento de los algoritmos en el contenedor de Docker.
+  - `comparar_algoritmos`: ejecutable para realizar la comparación de los resultados de los algoritmos.
+
+- `data/`: Archivos binarios 
 
 
-## Instrucciones para correr el código:
-  - 
-  - 
-  - 
-
+## Instrucciones para correr el código
+### Compilación
+Para compilar los ejecutables se deben correr los siguientes comandos:
+- `verificar_algoritmos`:
+  ```bash
+  gcc src/mergesort_externo.c src/quicksort_externo.c src/util.c src/verificar_algoritmos.c -o bin/verificar_algoritmos
+  ```
+- `obtener_a`:
+  ```bash
+  gcc src/mergesort_externo.c src/util.c src/obtener_a.c -o bin/obtener_a
+  ```
+- `test_docker`:
+  ```bash
+  gcc src/mergesort_externo.c src/quicksort_externo.c src/util.c src/test_docker.c -o bin/test_docker
+  ```
+- `comparar_algoritmos`:
+  ```bash
+  gcc src/mergesort_externo.c src/quicksort_externo.c src/util.c src/comparar_algoritmos.c -o bin/comparar_algoritmos
+  ```
+### Uso
+Para correr cada programa se deben correr los siguientes comandos:
+- `verificar_algoritmos`:
+  ```bash
+  ./bin/verificar_algoritmos
+  ```
+- `obtener_a`:
+  ```bash
+  ./bin/obtener_a
+  ```
+- `test_docker`:
+  ```bash
+  ./bin/test_docker
+  ```
+- `comparar_algoritmos`:
+  ```bash
+  ./bin/comparar_algoritmos
+  ```
 

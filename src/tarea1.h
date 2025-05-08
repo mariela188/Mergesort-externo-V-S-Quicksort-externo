@@ -177,4 +177,23 @@ int concatenar_externo(int n, char nombres[][64], int64_t tamanos[], const char 
    */
 int quicksort_externo(const char *A, int a, int64_t N);
 
+//obtener_a.c
+
+/**
+   * @brief Retorna la mejor aridad para mergesort externo dentro del rango especificado
+   *
+   * Esta función entrega la aridad 'a' que minimiza los accesos a disco en mergesort
+   * externo para un archivo de prueba. La aridad óptima se encuentra a través de 
+   * búsqueda ternaria dentro del rango [l, r]. 
+   * 
+   * @param A: nombre del archivo de prueba
+   * @param N: tamaño en bytes de A
+   * @param l: limite inferior del rango de búsqueda
+   * @param r: limite superior del rango de búsqueda
+   * @return int: aridad óptima dentro del rango
+   * @throws Termina el programa si ocurre algún error al ordenar el archivo de prueba
+   * con mergesort externo.
+   */
+int obtener_a(const char *A, int64_t N, int l, int r);
+
 #endif // TAREA1_H
