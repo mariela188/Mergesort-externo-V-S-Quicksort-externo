@@ -6,7 +6,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/time.h>
+#include <time.h>
 #include <stdbool.h>
 
 //Constantes
@@ -46,15 +46,27 @@ char *copiar_archivo_bin(const char *archivo);
 
 
 /**
-   * @brief Genera un archivo de tamaño N bytes.
+   * @brief Genera un archivo binario de N bytes.
    *
-   * Esta función genera un archivo binario del tamaño N bytes,
-   *  y le asigna el nombre dado. 
+   * Esta función genera un archivo binario de enteros 
+   * de tamaño total N bytes, y le asigna el nombre dado. 
    * 
    * @param nombre: nombre del archivo a generar
    * @param N: tamaño en bytes del archivo a generar.
 */
 void generar_input(int64_t N, const char *nombre);
+
+/**
+   * @brief Verifica si un archivo binario está ordenado ascendentemente.
+   * 
+   * Esta función recibe el nombre de un archivo binario y verifica si su contenido
+   * está ordenado ascendentemente.
+   * 
+   * @param nombre_archivo: nombre del archivo a verificar
+   * @return bool: true si el archivo está ordenado, false en caso contrario
+   * @throws Termina el programa si no puede abrir el archivo.
+   */
+  bool esta_ordenado(const char *nombre_archivo);
 
 //mergesort_externo.c
 
@@ -164,21 +176,5 @@ int concatenar_externo(int n, char nombres[][64], int64_t tamanos[], const char 
    * archivos de los subarreglos o al asignar memoria para malloc.
    */
 int quicksort_externo(const char *A, int a, int64_t N);
-
-
-//verificar_algoritmos.c
-
-/**
-   * @brief Verifica si un archivo binario está ordenado ascendentemente.
-   * 
-   * Esta función recibe el nombre de un archivo binario y verifica si su contenido
-   * está ordenado ascendentemente. Retorna true si está ordenado, false en caso contrario.
-   * 
-   * @param nombre_archivo: nombre del archivo a verificar
-   * @return bool: true si el archivo está ordenado, false en caso contrario
-   * @throws Termina el programa si no puede abrir el archivo.
-   */
-bool esta_ordenado(const char *nombre_archivo);
-
 
 #endif // TAREA1_H

@@ -110,3 +110,30 @@ void generar_input(int64_t N, const char *nombre_archivo) {
     free(bloque);
     fclose(archivo);
 }
+
+bool esta_ordenado(const char *nombre_archivo) {
+    FILE *archivo = fopen(nombre_archivo, "rb");
+    if (!archivo) {
+        perror("Error al abrir archivo");
+        exit(1);
+    }
+
+    int64_t anterior, actual;
+    
+    //archivo vacío
+    if (fread(&anterior, T, 1, archivo) != 1) {
+        fclose(archivo);
+        return true;
+    }
+
+    while (fread(&actual, T, 1, archivo) == 1) {
+        if (actual < anterior) {
+            fclose(archivo);
+            return false;
+        }
+        anterior = actual;
+    }
+
+    fclose(archivo);
+    return true;
+}

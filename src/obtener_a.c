@@ -11,11 +11,11 @@ int obtener_a(const char *A, int64_t N, int l, int r) {
             A_copia = copiar_archivo_bin(A);
             int resultado = mergesort_externo(A_copia, i, N);
             remove(A_copia);
+            free(A_copia);
             if (resultado < min) {
                 min = resultado;
                 a = i;
             }
-            free(A_copia);
         }
         return a;
     }
@@ -26,6 +26,7 @@ int obtener_a(const char *A, int64_t N, int l, int r) {
         A_copia = copiar_archivo_bin(A);
         int accesos_m1 = mergesort_externo(A_copia, m1, N);
         remove(A_copia);
+        free(A_copia);
         printf("(m2) Probando con a = %d\n", m2);
         A_copia = copiar_archivo_bin(A);
         int accesos_m2 = mergesort_externo(A_copia, m2, N);
