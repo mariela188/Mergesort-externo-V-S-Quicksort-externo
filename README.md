@@ -26,37 +26,37 @@ Para esta tarea, la organización del trabajo sigue el siguiente formato:
 ## Instrucciones para correr el código
 ### Compilación
 Para compilar los ejecutables se deben correr los siguientes comandos:
-- `verificar_algoritmos`:
+- verificar algoritmos:
   ```bash
   gcc src/mergesort_externo.c src/quicksort_externo.c src/util.c src/verificar_algoritmos.c -o bin/verificar_algoritmos
   ```
-- `obtener_a`:
+- obtener a:
   ```bash
   gcc src/mergesort_externo.c src/util.c src/obtener_a.c -o bin/obtener_a
   ```
-- `test_docker`:
+- test docker:
   ```bash
   gcc src/mergesort_externo.c src/quicksort_externo.c src/util.c src/test_docker.c -o bin/test_docker
   ```
-- `comparar_algoritmos`:
+- comparar algoritmos:
   ```bash
   gcc src/mergesort_externo.c src/quicksort_externo.c src/util.c src/comparar_algoritmos.c -o bin/comparar_algoritmos
   ```
 ### Uso
 Para correr cada programa se deben correr los siguientes comandos:
-- `verificar_algoritmos`:
+- verificar algoritmos:
   ```bash
   ./bin/verificar_algoritmos
   ```
-- `obtener_a`:
+- obtener a:
   ```bash
   ./bin/obtener_a
   ```
-- `test_docker`:
+- test docker:
   ```bash
   ./bin/test_docker
   ```
-- `comparar_algoritmos`:
+- comparar algoritmos:
   ```bash
   ./bin/comparar_algoritmos
   ```
