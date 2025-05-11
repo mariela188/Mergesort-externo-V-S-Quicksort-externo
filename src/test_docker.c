@@ -2,7 +2,7 @@
 
 int main() {
     int64_t N = (int64_t)4 * M; //4*M
-    int a = 5;
+    int a = 50;
     time_t inicio, fin;
     int tiempo;
     int accesos;
